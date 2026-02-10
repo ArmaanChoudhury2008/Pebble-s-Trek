@@ -1,0 +1,5 @@
+{
+  "name": "Pebble's Trek",
+  "description": "A funny trivia game where the AI generates 3 absurd truths and 1 lie.",
+  "requestFramePermissions": []
+}
