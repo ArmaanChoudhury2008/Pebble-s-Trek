@@ -19,7 +19,7 @@ export const PenguinScene: React.FC<PenguinSceneProps> = ({ progress, isSad }) =
       { left: '10%', bottom: '2rem', rotate: '0deg' },  // Start
       { left: '40%', bottom: '2rem', rotate: '0deg' },  // Step 1
       { left: '65%', bottom: '2rem', rotate: '-5deg' }, // Step 2 (Preparing to climb)
-      { left: '88%', bottom: '9rem', rotate: '0deg' }   // Summit (High up)
+      { left: '85%', bottom: '9rem', rotate: '0deg' }   // Summit (High up)
     ];
 
     return positions[safeStage];
@@ -29,7 +29,7 @@ export const PenguinScene: React.FC<PenguinSceneProps> = ({ progress, isSad }) =
   const isWinner = progress >= 3;
 
   return (
-    <div className="fixed bottom-0 left-0 w-full h-64 pointer-events-none z-0 overflow-hidden">
+    <div className="fixed bottom-0 left-0 w-full h-96 pointer-events-none z-0 overflow-hidden">
       {/* Background Gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent opacity-60"></div>
       
@@ -72,17 +72,26 @@ export const PenguinScene: React.FC<PenguinSceneProps> = ({ progress, isSad }) =
             🚩
           </div>
 
-          {/* Chat bubble */}
+          {/* Victory Chat bubble - Larger and more prominent */}
+          {/* Aligned to the left of the penguin (right:0) to prevent overflow on mobile since penguin is at ~85% left */}
           <div 
             className={`
-              absolute -top-16 left-1/2 -translate-x-1/2 
-              bg-white text-slate-900 px-4 py-2 rounded-2xl rounded-bl-none
-              text-sm font-bold whitespace-nowrap shadow-xl border-2 border-slate-200
-              transition-all duration-500 transform origin-bottom-left
+              absolute -top-36 
+              ${isWinner ? 'right-[-20px]' : 'left-1/2 -translate-x-1/2'}
+              bg-white text-slate-900 px-6 py-4 rounded-3xl 
+              ${isWinner ? 'rounded-br-none' : 'rounded-bl-none'}
+              shadow-[0_10px_30px_rgba(0,0,0,0.3)] border-4 border-yellow-400
+              transition-all duration-700 transform 
+              ${isWinner ? 'origin-bottom-right' : 'origin-bottom-left'}
+              z-50 w-max max-w-[280px] text-center
               ${isWinner ? 'scale-100 opacity-100 delay-[1600ms]' : 'scale-0 opacity-0'}
             `}
           >
-            We conquered it! 🎉
+             <div className="flex flex-col items-center">
+                <span className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-1">Mission Complete</span>
+                <span className="text-xl font-extrabold leading-tight">Excellent work,<br/>Explorer! 🎉</span>
+                <span className="text-sm font-normal text-slate-600 mt-2">We reached the summit!</span>
+            </div>
           </div>
 
           {/* Sad/Confused Bubble */}
