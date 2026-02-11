@@ -19,3 +19,10 @@ export interface GameStats {
   streak: number;
   bestStreak: number;
 }
+
+export type PebblesAction = 'idle' | 'walking' | 'smashing' | 'celebrating' | 'mocking';
+
+export interface Coordinates {
+  x: number;
+  y: number;
+}
